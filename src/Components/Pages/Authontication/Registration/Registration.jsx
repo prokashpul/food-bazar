@@ -83,7 +83,12 @@ const Registration = () => {
             Sin up
           </button>
         </form>
-        <Link to="/login">Already have an account ?</Link>
+        <Link
+          className="flex justify-center items-center text-red-700"
+          to="/login"
+        >
+          Already have an account ?
+        </Link>
       </div>
     </section>
   );

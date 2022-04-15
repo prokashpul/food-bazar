@@ -60,7 +60,12 @@ const Login = () => {
             Sin In
           </button>
         </form>
-        <Link to="/registration">Create New Account !!</Link>
+        <Link
+          className="flex justify-center items-center text-red-700"
+          to="/registration"
+        >
+          Create New Account !!
+        </Link>
       </div>
     </section>
   );
