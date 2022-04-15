@@ -2,12 +2,18 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import logo from "../../../Assets/images/logo.png";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
+import { signOut } from "firebase/auth";
 
 const Header = () => {
+  const [user] = useAuthState(auth);
+
   const navigate = useNavigate();
   const sinUpButtonHandel = () => {
     navigate("/registration");
   };
+
   return (
     <header>
       <nav className="md:flex md:justify-between items-center h-16 bg-slate-500 px-10">
@@ -28,20 +34,46 @@ const Header = () => {
               </span>
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              className={({ isActive }) => (isActive ? "text-red-500" : "")}
-              to="/login"
-            >
-              Login
-            </NavLink>
-          </li>
-          <button
-            className="bg-red-700 px-5 py-1 text-white hover:bg-white hover:text-red-700 duration-700 rounded-full"
-            onClick={sinUpButtonHandel}
-          >
-            Sin Up
-          </button>
+          {user ? (
+            <>
+              <li>
+                <NavLink
+                  className="text-red-500"
+                  to="/login"
+                  onClick={() => signOut(auth)}
+                >
+                  Log Out
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) => (isActive ? "text-red-500" : "")}
+                  to="/"
+                >
+                  <p className="bg-white rounded-full text-center h-8 w-8">
+                    {user?.displayName.slice(0, 2)}
+                  </p>
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink
+                  className={({ isActive }) => (isActive ? "text-red-500" : "")}
+                  to="/login"
+                >
+                  Login
+                </NavLink>
+              </li>
+              <button
+                className="bg-red-700 px-5 py-1 text-white hover:bg-white hover:text-red-700 duration-700 rounded-full"
+                onClick={sinUpButtonHandel}
+              >
+                Sin Up
+              </button>{" "}
+            </>
+          )}
         </ul>
       </nav>
     </header>

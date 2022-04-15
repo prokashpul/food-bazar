@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../../Assets/images/logo2.png";
 import {
   useCreateUserWithEmailAndPassword,
@@ -11,7 +11,7 @@ const Registration = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating, userUpdateError] = useUpdateProfile(auth);
-
+  const navigate = useNavigate();
   const handelSubmitForm = async (event) => {
     event.preventDefault();
     const name = event.target.name.value;
@@ -30,8 +30,9 @@ const Registration = () => {
       await updateProfile({ displayName: name });
     }
   };
-
-  console.log(user);
+  if (user) {
+    navigate("/");
+  }
   return (
     <section className="flex justify-center items-center my-20">
       <div className="md:w-[577px] w-[95%] mx-auto md:p-10 shadow-2xl rounded">

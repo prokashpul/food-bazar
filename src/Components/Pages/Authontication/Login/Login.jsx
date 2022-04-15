@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import React, { useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,15 +9,19 @@ const Login = () => {
     useSignInWithEmailAndPassword(auth);
   const navigate = useNavigate();
 
-  if (error) {
-    setErrorShow(error.message);
-    return;
-  }
   const handelSubmitForm = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
+
     await signInWithEmailAndPassword(email, password);
+    if (error) {
+      if (error?.message.includes("wrong-password")) {
+        setErrorShow("Email nad password not valid");
+      }
+
+      return;
+    }
   };
   if (user) {
     navigate("/");
@@ -29,6 +32,7 @@ const Login = () => {
         <h2 className="flex justify-center mb-10">
           <img className="h-20  " src={logo} alt="" />
         </h2>
+        <p className="text-red-700">{errorShow}</p>
         <form action="" onSubmit={handelSubmitForm}>
           <input
             type="email"
@@ -36,6 +40,7 @@ const Login = () => {
             id="email"
             className="w-full border-2 border-gray-500  focus:outline-red-600  pl-3 h-10 rounded mt-5"
             placeholder="Email"
+            required
           />
           <input
             type="password"
@@ -43,6 +48,7 @@ const Login = () => {
             id="name"
             className="w-full border-2 border-gray-500  focus:outline-red-600  pl-3 h-10 rounded mt-5"
             placeholder="Password"
+            required
           />
           {loading && <p className="text-red-700">Loading....</p>}
           <button
