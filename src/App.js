@@ -47,7 +47,14 @@ function App() {
               </RequireAuth>
             }
           ></Route>
-          <Route path="/food/:foodId" element={<FoodDetails />}></Route>
+          <Route
+            path="/food/:foodId"
+            element={
+              <RequireAuth>
+                <FoodDetails />
+              </RequireAuth>
+            }
+          ></Route>
           <Route path="*" element={<Error></Error>}></Route>
         </Routes>
         <Footer></Footer>

@@ -3,6 +3,7 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../../../Assets/images/logo2.png";
 import auth from "../../../../firebase.init";
+import SocialLogIn from "../SocialLogIn/SocialLogIn";
 const Login = () => {
   const [errorShow, setErrorShow] = useState("");
   const [signInWithEmailAndPassword, user, loading, error] =
@@ -29,8 +30,8 @@ const Login = () => {
     navigate(from, { replace: true });
   }
   return (
-    <section className="flex justify-center items-center my-20">
-      <div className="md:w-[577px] w-[95%] mx-auto md:p-10 shadow-2xl rounded">
+    <section className="flex flex-col justify-center items-center my-20">
+      <div className="md:w-[577px] w-[95%] mx-auto md:p-10 shadow-2xl rounded p-4">
         <h2 className="flex justify-center mb-10">
           <img className="h-20  " src={logo} alt="" />
         </h2>
@@ -66,6 +67,7 @@ const Login = () => {
         >
           Create New Account !!
         </Link>
+        <SocialLogIn></SocialLogIn>
       </div>
     </section>
   );
