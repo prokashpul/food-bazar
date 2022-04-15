@@ -26,14 +26,6 @@ const Header = () => {
         <ul className="md:flex gap-5 items-center text-xl">
           <li>
             <NavLink
-              className={({ isActive }) => (isActive ? "text-red-500" : "")}
-              to="/"
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
               className={({ isActive }) =>
                 isActive ? "text-red-500 relative" : " relative"
               }
@@ -48,11 +40,8 @@ const Header = () => {
           {user ? (
             <>
               <li>
-                <NavLink
-                  className={({ isActive }) => (isActive ? "text-red-500" : "")}
-                  to="/"
-                >
-                  <p className="bg-white rounded-full text-center h-8 w-8">
+                <NavLink to="/">
+                  <p className="bg-white rounded-full text-center h-8 w-8 text-red-600">
                     {user?.displayName.slice(0, 2)}
                   </p>
                 </NavLink>
