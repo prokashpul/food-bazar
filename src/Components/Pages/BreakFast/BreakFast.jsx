@@ -1,8 +1,10 @@
 import React from "react";
 import useFoodData from "../../../Hooks/FoodDataLoad/useFoodData";
+import Title from "../../../utilits/Dynamictitle/DynamicName";
 import SingleFoodItem from "../../Sheared/SengleFooditem/SingleFoodItem";
 
 const BreakFast = () => {
+  Title("BreakFast-Red Onion");
   const [foods] = useFoodData([]);
   const breakFast = foods?.filter((food) => food.time === "breakfast");
 

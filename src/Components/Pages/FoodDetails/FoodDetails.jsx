@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { FoodContext } from "../../../App";
 import { HiOutlineShoppingCart } from "react-icons/hi";
+import Title from "../../../utilits/Dynamictitle/DynamicName";
 
 const FoodDetails = () => {
   const foodId = useParams();
@@ -11,7 +12,7 @@ const FoodDetails = () => {
   console.log(food);
 
   const { img, name, price } = food || {};
-
+  Title(name);
   console.log(typeof parseInt(foodId.foodId));
 
   return (
