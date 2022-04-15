@@ -7,7 +7,6 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../../firebase.init";
 import { ToastContainer, toast } from "react-toastify";
-
 import "react-toastify/dist/ReactToastify.css";
 
 const SocialLogIn = () => {

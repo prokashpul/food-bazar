@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../../../Assets/images/logo2.png";
 import auth from "../../../../firebase.init";
 import SocialLogIn from "../SocialLogIn/SocialLogIn";
+
 const Login = () => {
   const [errorShow, setErrorShow] = useState("");
   const [signInWithEmailAndPassword, user, loading, error] =
