@@ -13,14 +13,25 @@ const Header = () => {
   const sinUpButtonHandel = () => {
     navigate("/registration");
   };
+  const home = () => {
+    navigate("/");
+  };
 
   return (
     <header>
       <nav className="md:flex md:justify-between items-center h-16 bg-slate-500 px-10">
-        <div>
+        <div className="cursor-pointer" onClick={home}>
           <img className="h-10" src={logo} alt="" />
         </div>
         <ul className="md:flex gap-5 items-center text-xl">
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "text-red-500" : "")}
+              to="/"
+            >
+              Home
+            </NavLink>
+          </li>
           <li>
             <NavLink
               className={({ isActive }) =>
@@ -38,21 +49,21 @@ const Header = () => {
             <>
               <li>
                 <NavLink
-                  className="text-red-500"
-                  to="/login"
-                  onClick={() => signOut(auth)}
-                >
-                  Log Out
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
                   className={({ isActive }) => (isActive ? "text-red-500" : "")}
                   to="/"
                 >
                   <p className="bg-white rounded-full text-center h-8 w-8">
                     {user?.displayName.slice(0, 2)}
                   </p>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="text-white"
+                  to="/login"
+                  onClick={() => signOut(auth)}
+                >
+                  Log Out
                 </NavLink>
               </li>
             </>

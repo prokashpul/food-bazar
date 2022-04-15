@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../../../Assets/images/logo2.png";
 import auth from "../../../../firebase.init";
 const Login = () => {
@@ -8,6 +8,8 @@ const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handelSubmitForm = async (event) => {
     event.preventDefault();
@@ -24,7 +26,7 @@ const Login = () => {
     }
   };
   if (user) {
-    navigate("/");
+    navigate(from, { replace: true });
   }
   return (
     <section className="flex justify-center items-center my-20">
