@@ -42,7 +42,13 @@ const Header = () => {
               <li>
                 <NavLink to="/">
                   <p className="bg-white rounded-full text-center h-8 w-8 text-red-600">
-                    {user?.displayName.slice(0, 2)}
+                    {/* {user?.displayName.slice(0, 2)} */}
+                    <img
+                      title={user?.displayName}
+                      className="h-8 w-8 rounded-full"
+                      src={user?.photoURL}
+                      alt={user?.displayName.slice(0, 2)}
+                    />
                   </p>
                 </NavLink>
               </li>
