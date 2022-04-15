@@ -3,11 +3,12 @@ import useFoodData from "../../../Hooks/FoodDataLoad/useFoodData";
 import SingleFoodItem from "../../Sheared/SengleFooditem/SingleFoodItem";
 
 const Lunch = () => {
-  const [foods] = useFoodData("breakfast.json");
+  const [foods] = useFoodData([]);
+  const lunch = foods?.filter((food) => food.time === "lunch");
   return (
     <div className="md:w-[1080px] min-h-[85vh] w-[95%] mx-auto my-20">
       <div className="grid md:grid-cols-3 md:gap-10">
-        {foods?.map((food) => (
+        {lunch?.map((food) => (
           <SingleFoodItem food={food} key={food.id}></SingleFoodItem>
         ))}
       </div>

@@ -4,11 +4,11 @@ import { NavLink } from "react-router-dom";
 const FoodMenu = () => {
   return (
     <div className="flex justify-center items-center h-20">
-      <ul className="flex justify-center items-center gap-8">
+      <ul className="flex justify-center text-xl font-semibold items-center gap-8">
         <li>
           <NavLink
             className={({ isActive }) => (isActive ? "text-red-500" : "")}
-            to="/"
+            to="/breakfast"
           >
             Breakfast
           </NavLink>{" "}
@@ -16,7 +16,7 @@ const FoodMenu = () => {
         <li>
           <NavLink
             className={({ isActive }) => (isActive ? "text-red-500" : "")}
-            to="/lance"
+            to="/"
           >
             Lance
           </NavLink>{" "}

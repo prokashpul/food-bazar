@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
-const useFoodData = (url) => {
+const useFoodData = () => {
   const [foods, setFoods] = useState([]);
   useEffect(() => {
-    fetch(url)
+    fetch("foods.json")
       .then((res) => res.json())
       .then((data) => setFoods(data));
-  }, [url]);
+  }, []);
   return [foods, setFoods];
 };
 
