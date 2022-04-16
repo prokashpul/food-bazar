@@ -3,9 +3,11 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../../../Assets/images/logo2.png";
 import auth from "../../../../firebase.init";
+import Title from "../../../../utilits/Dynamictitle/DynamicName";
 import SocialLogIn from "../SocialLogIn/SocialLogIn";
 
 const Login = () => {
+  Title("Log In now");
   const [errorShow, setErrorShow] = useState("");
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);

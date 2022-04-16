@@ -1,17 +1,25 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../../../Assets/images/logo2.png";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   useCreateUserWithEmailAndPassword,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../../../firebase.init";
+import SocialLogIn from "../SocialLogIn/SocialLogIn";
+import Title from "../../../../utilits/Dynamictitle/DynamicName";
+
 const Registration = () => {
-  const [errorShow, setErrorShow] = useState("");
+  Title("Create an Account");
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const [updateProfile, updating, userUpdateError] = useUpdateProfile(auth);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const handelSubmitForm = async (event) => {
     event.preventDefault();
     const name = event.target.name.value;
@@ -20,18 +28,21 @@ const Registration = () => {
     const confirmPassword = event.target.confirmPassword.value;
 
     if (password !== confirmPassword) {
-      setErrorShow("password no mach");
+      toast("Password no mach!!");
       return;
-    } else if (error || userUpdateError) {
-      setErrorShow(error?.message, userUpdateError?.message);
+    } else if (userUpdateError) {
+      toast(userUpdateError?.message);
       return;
+    } else if (error) {
+      toast(error?.message);
     } else {
       await createUserWithEmailAndPassword(email, password);
       await updateProfile({ displayName: name });
     }
   };
   if (user) {
-    navigate("/");
+    navigate(from, { replace: true });
+    toast("Success fully create a account ..");
   }
   return (
     <section className="flex justify-center items-center my-20">
@@ -40,7 +51,7 @@ const Registration = () => {
           <img className="h-20 " src={logo} alt="" />
         </h2>
         {user && <p>create new user</p>}
-        {errorShow}
+
         <form action="" onSubmit={handelSubmitForm}>
           <input
             type="text"
@@ -89,6 +100,8 @@ const Registration = () => {
         >
           Already have an account ?
         </Link>
+
+        <SocialLogIn></SocialLogIn>
       </div>
     </section>
   );

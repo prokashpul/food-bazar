@@ -46,8 +46,12 @@ const Header = () => {
                     <img
                       title={user?.displayName}
                       className="h-8 w-8 rounded-full"
-                      src={user?.photoURL}
-                      alt={user?.displayName.slice(0, 2)}
+                      src={
+                        user?.photoURL
+                          ? user?.photoURL
+                          : "https://i.ibb.co/nRy98qG/user.png"
+                      }
+                      alt={user?.displayName}
                     />
                   </p>
                 </NavLink>
